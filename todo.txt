@@ -1,0 +1,32 @@
+mobile mode: app bar at bottom?
+                home
+                search
+                cart
+                profile ? or top right
+
+improve category page
+add themed collections
+product page
+product info, details, tags
+search results page
+login/signup:
+    via google
+    via phone number
+cart page
+payment provider
+profile:
+    page
+    settings
+help/support
+social links
+
+loading screen? 
+about us?
+track order?
+return/exchange?
+faq?
+contact?
+T&C?
+Return & Exchanges Policy?
+Privacy Policy?
+Refund Policy?
