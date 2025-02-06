@@ -21,6 +21,7 @@
 // }
 import { Inter } from "next/font/google"
 import { SiteHeader } from "@/components/site-header"
+import { CartProvider } from "@/lib/cart-provider"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -34,11 +35,13 @@ export default function RootLayout({
       <head>
         {/* <meta name="theme-color" content="#f7ffbf" /> */}
         <body className={inter.className}>
+        <CartProvider>
           {/* <div className="relative flex min-h-screen flex-col mx-auto max-w-7xl"> */}
           <div className="relative flex min-h-screen flex-col mx-auto">
             <SiteHeader />
             <div className="flex-1 w-full">{children}</div>
           </div>
+          </CartProvider>
         </body>
       </head>
     </html>

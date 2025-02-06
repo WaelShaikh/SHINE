@@ -1,6 +1,6 @@
 import { ProductGrid } from "@/components/product-grid"
 
-const bestSellers = [
+const newArrivals = [
   { name: "Classic Gold Chain", href: "/products/classic-gold-chain", image: "/placeholder.svg", price: "$249" },
   { name: "Silver Hoop Earrings", href: "/products/silver-hoop-earrings", image: "/placeholder.svg", price: "$89" },
   { name: "Diamond Pendant", href: "/products/diamond-pendant", image: "/placeholder.svg", price: "$399" },
@@ -15,8 +15,8 @@ export default function BestSellersPage() {
   return (
     <main className="py-8 sm:py-10 lg:py-12">
       <div className="px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold mb-8">Best Sellers</h1>
-        <ProductGrid items={bestSellers} />
+        <h1 className="text-3xl font-bold mb-8">New Arrivals</h1>
+        <ProductGrid items={newArrivals} />
       </div>
     </main>
   )

@@ -1,14 +1,28 @@
-mobile mode: app bar at bottom?
-                home
-                search
-                cart
-                profile ? or top right
+header:
+    [ ] remove profile icon, no one uses it. move it to sidebar bottom?
 
-improve category page
+cart:
+    [ ] fix styling
+    [ ] checkout page
+
+mobile mode: app bar at bottom?
+    [ ] home
+    [ ] search
+    [ ] cart
+    [ ] profile ? or top right
+
+product page:
+    [ ] photos, rating, price, description, add to cart, product details, reviews, FAQs?, similar items, tags
+    [ ] similar products dollar sign
+
+search:
+    [ ] show loading while fetching [currently showing no products]
+    [ ] search page with no query
+    [ ] search suggestions
+    [ ] search history?
+
 add themed collections
-product page
-product info, details, tags
-search results page
+
 login/signup:
     via google
     via phone number
@@ -20,7 +34,8 @@ profile:
 help/support
 social links
 
-loading screen? 
+loading screen?
+wishlist/liked/saved?
 about us?
 track order?
 return/exchange?

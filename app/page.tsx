@@ -1,4 +1,4 @@
-import { CategoryGrid } from "@/components/category-grid"
+// import { CategoryGrid } from "@/components/category-grid"
 import { CollectionCarousel } from "@/components/collection-carousel"
 import { ProductGrid } from "@/components/product-grid"
 import { HorizontalScrollProducts } from "@/components/horizontal-scroll-products"
@@ -110,7 +110,7 @@ export default function Home() {
       {/* <section className="py-12">
         <div className="container px-4">
           <div className="grid gap-6 lg:gap-8"> */}
-      <section className="py-8 sm:py-10 lg:py-12">
+      <section className="pt-8 sm:pt-10 lg:pt-12">
         <div className="px-4 sm:px-6 lg:px-8">
           {/* <div className="grid gap-4 sm:gap-6 lg:gap-8">
             <div className="aspect-[2/1] overflow-hidden rounded-3xl bg-[#f3f8d8]"> */}
@@ -141,12 +141,20 @@ export default function Home() {
       {/* <CategoryGrid title="EARRINGS" items={collections.earrings} />
       <CategoryGrid title="BRACELETS" items={collections.bracelets} />
       <CategoryGrid title="NECKLACES" items={collections.necklaces} /> */}
-      <HorizontalProductList title="BEST SELLERS" items={bestSellers} viewAllHref="best-sellers"/>
+      <div className="px-4 sm:px-6 lg:px-8">
+        <HorizontalProductList title="BEST SELLERS" items={bestSellers} viewAllHref="best-sellers"/>
+      </div>
       <HorizontalScrollProducts title="SALE" items={saleItems} viewAllHref="sale"/>
       <ProductGrid title="NEW ARRIVALS" items={newArrivals} />
-      <HorizontalProductList title="EARRINGS" items={collections.earrings} viewAllHref="earrings"/>
-      <HorizontalProductList title="BRACELETS" items={collections.bracelets} viewAllHref="bracelets"/>
-      <HorizontalProductList title="NECKLACES" items={collections.necklaces} viewAllHref="necklaces"/>
+      <div className="px-4 sm:px-6 lg:px-8">
+        <HorizontalProductList title="EARRINGS" items={collections.earrings} viewAllHref="earrings"/>
+      </div>
+      <div className="px-4 sm:px-6 lg:px-8">
+        <HorizontalProductList title="BRACELETS" items={collections.bracelets} viewAllHref="bracelets"/>
+      </div>
+      <div className="px-4 sm:px-6 lg:px-8">
+        <HorizontalProductList title="NECKLACES" items={collections.necklaces} viewAllHref="necklaces"/>
+      </div>
     </main>
   )
 }

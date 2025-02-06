@@ -23,9 +23,9 @@ interface DiscountedProduct {
 }
 
 interface HorizontalProductListProps {
-  title: string
+  title?: string
   items: Product[]
-  viewAllHref: string
+  viewAllHref?: string
 }
 
 export function HorizontalProductList({ title, items, viewAllHref }: HorizontalProductListProps) {
@@ -54,10 +54,10 @@ export function HorizontalProductList({ title, items, viewAllHref }: HorizontalP
   return (
     // <section className="py-6 sm:py-8 bg-yellow-50">
     <section className="py-6 sm:py-8 mb-5">
-      <div className="px-4 sm:px-6 lg:px-8">
+      <div className="">
         {/* <h2 className="text-xl font-bold mb-4">{title}</h2> */}
         <div className="flex items-center items-end">
-          <h2 className="flex text-xl font-bold mb-4">{title}</h2>
+          {title && (<h2 className="flex text-xl font-bold mb-4">{title}</h2>)}
           <div className="flex flex-grow mb-4 justify-end">
             <div className="flex items-center space-x-2">
               <Button
@@ -116,6 +116,8 @@ export function HorizontalProductList({ title, items, viewAllHref }: HorizontalP
             ))}
           </div>
         </div>
+        {
+          viewAllHref && (
         <div className="flex justify-center">
           <Link href={viewAllHref}>
             <Button variant="outline" className="rounded-full h-12 px-20 m-2 text-lg">
@@ -126,10 +128,11 @@ export function HorizontalProductList({ title, items, viewAllHref }: HorizontalP
           {/* <Link
             href={`/${title.toLowerCase().replace(" ", "-")}`}
             className="text-sm text-muted-foreground hover:text-primary"
-          >
+            >
             View all →
-          </Link> */}
+            </Link> */}
         </div>
+        )}
       </div>
     </section>
   )

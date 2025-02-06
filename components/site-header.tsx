@@ -1,5 +1,6 @@
 "use client"
 
+import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { ShoppingBag, User, Menu, Search, X, ChevronDown } from "lucide-react"
@@ -7,6 +8,8 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetHeader, SheetDescription } from "@/components/ui/sheet"
 // import { Sheet, SheetContent, SheetTrigger, type SheetProps } from "@/components/ui/sheet"
 // import { cn } from "@/lib/utils"
+
+import { Cart } from "@/components/cart"
 
 // const navigation = [
 //   { name: "EARRINGS", href: "/earrings" },
@@ -33,7 +36,18 @@ const navigation = [
 
 export function SiteHeader() {
 
+  const [isSheetOpen, setIsSheetOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
+  const [searchVisible, setSearchVisible] = useState(false)
+  const router = useRouter()
+
+  const handleSearch = (e?: React.FormEvent) => {
+    e && e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`)
+    }
+    closeSearch();
+  }
 
   useEffect(() => {
     // This code will only run on the client side, after the component mounts
@@ -64,14 +78,6 @@ export function SiteHeader() {
     }
   }, [searchQuery])
 
-  const handleSearch = () => {
-    if (searchQuery.trim()) {
-      console.log("Searching for:", searchQuery)
-      alert("Searching for:"+ searchQuery)
-      // Add your search functionality here, such as making an API call
-    }
-  }
-
   // window.addEventListener("keydown", function(event) {
   
   //   switch(event.code) {
@@ -82,12 +88,10 @@ export function SiteHeader() {
   //   }
   // }, true);
 
-  const [searchVisible, setSearchVisible] = useState(false)
-
   const toggleSearch = () => {
     // setSearchVisible((prev) => !prev)
     setSearchVisible(true);
-    document.getElementById("text-box")?.focus();
+    document.getElementById("text-box")?.focus({preventScroll: true});
   }
 
   const closeSearch = () => {
@@ -96,6 +100,9 @@ export function SiteHeader() {
     setSearchQuery("");
   }
 
+  const closeSheet = () => {
+    setIsSheetOpen(false)
+  }
 
   // function showSearch() {
   //   const searchbar = document.getElementById("searchbar");
@@ -107,7 +114,7 @@ export function SiteHeader() {
       {/* <div className="container flex h-16 items-center justify-between px-4"> */}
       <div className="flex h-10 items-center justify-between px-0 sm:px-4 lg:px-4">
         <div className="flex md:hidden">
-          <Sheet>
+          <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
           {/* <NoOverlaySheet> */}
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden !outline-none focus:outline-none">
@@ -141,6 +148,7 @@ export function SiteHeader() {
                           key={subItem.name}
                           href={subItem.href}
                           className="pl-3 block py-2 text-sm text-[#333] hover:text-primary font-SinkinSans100"
+                          onClick={closeSheet} // Add this line
                         >
                           {subItem.name}
                         </Link>
@@ -151,6 +159,7 @@ export function SiteHeader() {
                     key={item.name}
                     href={item.href}
                     className="text-md font-bold font-SinkinSans300 transition-colors hover:text-primary"
+                    onClick={closeSheet} // Add this line
                   >
                     {item.name}
                   </Link>
@@ -222,10 +231,11 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center -space-x-3 sm:space-x-2">
-          <Button variant="ghost" size="icon">
+          {/* <Button variant="ghost" size="icon">
             <ShoppingBag className="h-5 w-5" />
             <span className="sr-only">Shopping cart</span>
-          </Button>
+          </Button> */}
+          <Cart />
           <Button variant="ghost" size="icon">
             <User className="h-5 w-5" />
             <span className="sr-only">Account</span>
@@ -243,27 +253,27 @@ export function SiteHeader() {
 
 
       {/* <div id="searchbar" className="absolute bg-[#ffffff] top-0 w-full h-10 flex mx-auto items-center justify-between px-4 -translate-y-full"> */}
-      <div id="searchbar" className={`absolute bg-[#ffffff] top-0 w-full h-10 space-x-2 flex mx-auto items-center justify-between px-4 transition-transform duration-300 ease-in-out ${
+      <form noValidate onSubmit={handleSearch} id="searchbar" className={`absolute bg-[#ffffff] top-0 w-full h-10 space-x-2 flex mx-auto items-center justify-between px-4 transition-transform duration-300 ease-in-out ${
           searchVisible ? "translate-y-0" : "-translate-y-full"
         }`}>
         <div className="relative w-full h-full">
           <div className="absolute inset-y-0 flex items-center ps-3 pointer-events-none h-full">
           </div>
-          <input type="text" id="text-box" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="!outline-none text-gray-900 block w-full h-full border-transparent focus:border-transparent" placeholder="Search..." required />
+          <input onBlur={closeSearch} type="text" id="text-box" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="!outline-none text-gray-900 block w-full h-full border-transparent focus:border-transparent" placeholder="Search..." required />
         </div>
-        <Button variant="ghost" size="icon" className="px-2.5 !outline-none focus:outline-none" onClick={handleSearch}>
-          <Search className="h-5 w-5" />
-          <span className="sr-only">Search</span>
-        </Button>
         {/* <Button variant="ghost" size="icon" className="px-2.5 !outline-none focus:outline-none">
           <Close className="h-5 w-5" />
           <span className="sr-only">Close</span>
-        </Button> */}
-        <Button variant="ghost" size="icon" className="px-2.5 !outline-none focus:outline-none" onClick={closeSearch}>
+          </Button> */}
+        <Button variant="ghost" size="icon" className="px-2.5 !outline-none focus:outline-none absolute right-7 sm:relative sm:right-auto" onClick={handleSearch}>
+          <Search className="h-5 w-5" />
+          <span className="sr-only">Search</span>
+        </Button>
+        <Button variant="ghost" size="icon" className="px-2.5 !outline-none focus:outline-none absolute right-0 sm:relative sm:right-auto" onClick={closeSearch}>
           <X className="h-5 w-5" />
           <span className="sr-only">Toggle Search</span>
         </Button>
-      </div>
+      </form>
 
 
 
